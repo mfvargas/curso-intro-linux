@@ -20,6 +20,18 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+    	<style type="text/css">
+        	.column {
+            	float: left;
+            	width: 50%;
+        	}
+        	/* Clear floats after the columns */
+        	.row:after {
+            	content: "";
+            	display: table;
+            	clear: both;
+        	}
+    	</style> 
 	</head>
 	<body>
 		<div class="reveal">
@@ -32,32 +44,24 @@
 					<small>Febrero de 2019</small>
 				</section>
 				<section id="linux">
-				  <h3>El sistema operativo Linux</h3>
-					<div style="text-align:left">
-					  <li>Con frecuencia, son escasos o incompletos.</li>					
-					  <li>Los que están disponibles tienen sesgos:
-					    <ul>
-					      <li>Espaciales</li>
-					      <li>Taxonómicos</li>
-					      <li>Temporales</li>
-					    </ul>
-					  </li>
-</div>					
-				  <div class="row" >
-				    <div class="column" style="width:50%">
-				      <figure>
-                <img src="img/vaciosGRUAS.jpg" alt="Vacíos de conservación" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
-                <figcaption><small>Vacíos de conservación<br>Imagen de Sinac</small></figcaption>
-              </figure>
-            </div>
-				    <div class="column" style="width:50%">
-				      <figure>
-                <img src="img/pezleon.jpg" alt="Especies invasivas" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
-                <figcaption><small>Especies invasivas<br><a href="https://en.wikipedia.org/wiki/Pterois#/media/File:Red_lionfish_near_Gilli_Banta_Island.JPG">Imagen de Alexander Vasenin</a></small></figcaption>
-              </figure>
-            </div>
-          </div>            
-</section> 
+					<h3>Linux</h3>
+						<div class="row" >
+							<div class="column" style="width:45%">
+								<figure>
+									<img src="img/Tux.svg.png" alt="Tux" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+									<figcaption><small>Tux, mascota de Linux</small></figcaption>
+								</figure>
+							</div>
+							<div class="column" style="width:55%">
+								<div style="text-align:left">
+									<li>Sistema operativo tipo <a href="https://en.wikipedia.org/wiki/Unix">Unix</a>, a veces llamado GNU/Linux.</li>
+									<li>Es uno de los ejemplos más prominentes de <strong>software libre y de código abierto</strong>.</li>
+									<li>En su desarrollo han participado más de <a href="https://www.linuxfoundation.org/blog/2017/10/2017-linux-kernel-report-highlights-developers-roles-accelerating-pace-change/">15000 programadores</a>.</li>
+									<li>Se utiliza en plataformas que van desde relojes hasta supercomputadores.</li>
+								</div>	
+							</div>
+						</div>			
+				</section> 
 			</div>
 		</div>
 
