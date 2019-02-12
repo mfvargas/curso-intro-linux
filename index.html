@@ -252,7 +252,7 @@
 							</code></pre>
 					</small></div>
 				</section>
-				<section id="linux-comandos-archivos">
+				<section id="linux-comandos-archivos-01">
 					<h3>Comandos: manejo de archivos</h3>
 					<div style="text-align:left"><small>
 							<strong>ls</strong>: lista los contenidos de un directorio.
@@ -284,8 +284,147 @@
 								$ echo "Línea 02 Archivo 01" >> archivo01.txt
 								$ echo "Línea 01 Archivo 02" >> archivo02.txt
 							</code></pre>				
+					</small></div>
+				</section>
+				<section id="linux-comandos-archivos-02">
+					<h3>Comandos: manejo de archivos</h3>
+					<div style="text-align:left"><small>
+							<strong>more</strong>: imprime los contenidos de un archivo.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ more archivo01.txt
+								Línea 01 Archivo 01
+								Línea 02 Archivo 01
+							</code></pre>				
+
+							<strong>cat</strong>: concatena los contenidos de varios archivos.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cat archivo01.txt archivo02.txt > archivo03.txt
+								$ more archivo03.txt
+								Línea 01 Archivo 01
+								Línea 02 Archivo 01
+								Línea 01 Archivo 02
+							</code></pre>				
+
+							<strong>wget</strong>: descarga un archivo de Internet.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ wget http://www.textfiles.com/internet/usenet.txt
+							</code></pre>			
+					</small></div>
+				</section>
+				<section id="linux-comandos-archivos-03">
+					<h3>Comandos: manejo de archivos</h3>
+					<div style="text-align:left"><small>
+							<strong>head</strong>: imprime las primeras líneas de un archivo.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ head -20 usenet.txt
+
+										  How to Use USENET Effectively
 
 
+												   Matt Bishop
+								Research Institute for Advanced Computer Science
+												 Mail Stop 230-5
+											NASA Ames Research Center
+											Moffett Field, CA  94035
+							</code></pre>				
+
+							<strong>tail</strong>: imprime las últimas líneas de un archivo.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ tail -50 usenet.txt
+								17. What is the address or phone number of the "foo" company?
+
+									Try the white and  yellow  pages  of  your  phone  directory,
+									first; a sales representative will surely know, and if you're
+									a potential customer they will be  who  you're  looking  for.
+									Phone  books  for  other  cities are usually available in li-
+									braries of any size.  Whoever buys or recommends  things  for
+							</code></pre>				
+					</small></div>
+				</section>
+				<section id="linux-comandos-archivos-04">
+					<h3>Comandos: manejo de archivos</h3>
+					<div style="text-align:left"><small>
+							<strong>cp</strong>: copia archivos.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cp archivo03.txt archivo04.txt
+							</code></pre>				
+
+							<strong>rm</strong>: borra archivos.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ rm archivo04.txt
+							</code></pre>	
+
+							<strong>mv</strong>: mueve o renombra archivos.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ mv archivo03.txt otronombre.txt
+							</code></pre>					
+					</small></div>
+				</section>
+				<section id="linux-comandos-directorios">
+					<h3>Comandos: manejo de archivos</h3>
+					<div style="text-align:left"><small>
+							<strong>mkdir</strong>: crea un directorio.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ mkdir micarpeta
+							</code></pre>
+
+							<strong>cd</strong>: se cambia a un directorio.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cd micarpeta
+							</code></pre>	
+
+							cambio al directorio raíz:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cd /
+							</code></pre>	
+
+							cambio al directorio padre:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cd ..
+							</code></pre>				
+
+							cambio al directorio "home" del usuario:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cd
+							</code></pre>			
+					</small></div>
+				</section>
+				<section id="linux-comandos-otros">
+					<h3>Comandos: otros</h3>
+					<div style="text-align:left"><small>
+							<strong>clear</strong>: limpia la pantalla.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ clear
+							</code></pre>
+							<strong>passwd</strong>: cambia la clave del usuario.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ passwd
+							</code></pre>
+					</small></div>
+				</section>
+				<section id="linux-instalacion-aplicaciones">
+					<h3>Ejemplos de instalación de aplicaciones</h3>
+					<div style="text-align:left"><small>
+							<strong>QGIS </strong><a href="https://www.qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu">(https://www.qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu)</a>
+							<br><br>
+							Se agrega el repositorio a la lista de repositorios del sistema operativo:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo nano /etc/apt/sources.list
+							</code></pre>
+							Debe añadirse la línea:
+							<pre><code class="hljs" data-trim contenteditable>
+								deb https://qgis.org/ubuntu bionic main
+							</code></pre>
+							(En nano, se guarda el archivo con Ctrl-X)
+							<br><br>
+							Se descargan las llaves, se actualizan los repositorios y se instalan las aplicaciones:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ wget -O - https://qgis.org/downloads/qgis-2017.gpg.key | gpg --import
+								$ gpg --fingerprint CAEB3DC3BDF7FB45
+								$ gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -
+								$ sudo apt-get update
+								$ sudo apt-get install qgis python-qgis qgis-plugin-grass
+							</code></pre>
 					</small></div>
 				</section>
 
