@@ -402,8 +402,49 @@
 							</code></pre>
 					</small></div>
 				</section>
-				<section id="linux-instalacion-aplicaciones">
-					<h3>Ejemplos de instalación de aplicaciones</h3>
+				<section id="linux-instalacion-aplicaciones-01">
+					<h3>Instalación de aplicaciones</h3>
+					<div style="text-align:left"><small>
+							<strong>GDAL/OGR</strong>
+							<br><br>
+							Se actualizan los repositorios y se instalan las aplicaciones:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo apt-get update
+								$ sudo apt-get install gdal-bin libgdal-dev
+							</code></pre>
+					</small></div>
+				</section>
+				<section id="linux-instalacion-aplicaciones-02">
+					<h3>Instalación de aplicaciones</h3>
+					<div style="text-align:left"><small>
+							<strong>R </strong><a href="https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-18-04">(https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-18-04)</a>
+							<br><br>
+							Se añade la llave y el repositorio:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+								$ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+							</code></pre>
+							<br>
+							Se actualizan los repositorios y se instalan las aplicaciones:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo apt-get update
+								$ sudo apt install r-base
+							</code></pre>
+							<br>
+							Ejecución de R e instalación de paquetes:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo -i R
+								> install.packages("maptools")
+								> install.packages("sp")
+								> install.packages("randomForest")
+								> install.packages("raster")
+								> install.packages("rgdal")
+								> install.packages("RSAGA")
+							</code></pre>
+					</small></div>
+				</section>
+				<section id="linux-instalacion-aplicaciones-03">
+					<h3>Instalación de aplicaciones</h3>
 					<div style="text-align:left"><small>
 							<strong>QGIS </strong><a href="https://www.qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu">(https://www.qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu)</a>
 							<br><br>
@@ -416,7 +457,7 @@
 								deb https://qgis.org/ubuntu bionic main
 							</code></pre>
 							(En nano, se guarda el archivo con Ctrl-X)
-							<br><br>
+							<br>
 							Se descargan las llaves, se actualizan los repositorios y se instalan las aplicaciones:
 							<pre><code class="hljs" data-trim contenteditable>
 								$ wget -O - https://qgis.org/downloads/qgis-2017.gpg.key | gpg --import
