@@ -212,6 +212,83 @@
 						</div>
 					</div>			
 				</section>
+				<section id="ubuntu-instalacion">
+					<h3>Instalación de Ubuntu Desktop</h3>
+					<div style="text-align:left">
+						<li>Se mostrará como realizar la instalación de <a href="https://www.ubuntu.com/desktop">Ubuntu Desktop</a> en una <a href="https://es.wikipedia.org/wiki/M%C3%A1quina_virtual">máquina virtual</a> de <a href="https://www.virtualbox.org/">VirtualBox</a>. Este enfoque es apropiado para uso personal (ej. pruebas).</li>
+						<li>Es necesario descargar:
+							<ul>
+								<li><a href="https://www.ubuntu.com/download/desktop">Imagen ISO del instalador de Ubuntu Desktop.</a></li>
+								<li><a href="https://www.virtualbox.org/wiki/Downloads">Software de VirtualBox.</a></li>
+							</ul>
+						</li>
+					</div>
+				</section>
+				<section id="linux-comandos-info">
+					<h3>Comandos: información general</h3>
+					<div style="text-align:left"><small>
+							<strong>whoami</strong>: imprime el nombre del usuario.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ whoami
+								mfvargas
+							</code></pre>				
+			
+							<strong>hostname</strong>: imprime el nombre de la computadora (o "host").
+							<pre><code class="hljs" data-trim contenteditable>
+								$ hostname
+								eira
+							</code></pre>
+
+							<strong>uname</strong>: imprime información sobre el sistema.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ uname -a
+								Linux eira 4.19.0-1-amd64 #1 SMP Debian 4.19.12-1 (2018-12-22) x86_64 GNU/Linux
+							</code></pre>
+
+							<strong>pwd</strong>: imprime el directorio actual.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ pwd
+								/home/mfvargas
+							</code></pre>
+					</small></div>
+				</section>
+				<section id="linux-comandos-archivos">
+					<h3>Comandos: manejo de archivos</h3>
+					<div style="text-align:left"><small>
+							<strong>ls</strong>: lista los contenidos de un directorio.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ls
+								Desktop  Documents  Downloads  Music  Pictures  Public  shared  Templates  Videos
+								$ ls -l
+								total 36
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Desktop
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Documents
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Downloads
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Music
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Pictures
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Public
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:31 shared
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Templates
+								drwxr-xr-x 2 mfvargas mfvargas 4096 feb 10 18:00 Videos
+							</code></pre>				
+
+							<strong>touch</strong>: crea un archivo vacío.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ touch archivo01.txt
+								$ touch archivo02.txt
+							</code></pre>				
+
+							Para añadir contenido a un archivo:
+							<pre><code class="hljs" data-trim contenteditable>
+								$ echo "Línea 01 Archivo 01" >> archivo01.txt
+								$ echo "Línea 02 Archivo 01" >> archivo01.txt
+								$ echo "Línea 01 Archivo 02" >> archivo02.txt
+							</code></pre>				
+
+
+					</small></div>
+				</section>
+
 			</div>
 		</div>
 
