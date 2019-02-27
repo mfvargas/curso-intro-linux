@@ -409,6 +409,15 @@
 							<pre><code class="hljs" data-trim contenteditable>
 								$ passwd
 							</code></pre>
+							<strong>sudo</strong>: ejecuta un comando como superusuario.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo apt-get install git
+							</code></pre>
+							<strong>apt</strong>: conjunto de comandos para instalar aplicaciones.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ sudo apt-get update
+								$ sudo apt-get htop
+							</code></pre>
 					</small></div>
 				</section>
 				<section id="linux-instalacion-aplicaciones-01">
@@ -475,6 +484,235 @@
 								$ sudo apt-get update
 								$ sudo apt-get install qgis python-qgis qgis-plugin-grass
 							</code></pre>
+					</small></div>
+				</section>
+				<section id="gdalogr">
+					<h3>Ejemplo de uso de la línea de comandos: GDAL/OGR</h3>
+					<div style="text-align:left">
+						<li>La <a href="http://www.gdal.org/">GeoSpatial Data Abstraction Library (GDAL)</a>, también llamada GDAL/OGR, es una biblioteca de código abierto para la lectura y escritura de datos raster (GDAL) y vectoriales (OGR).</li>
+						<li>Es un proyecto oficial de la <a href="https://www.osgeo.org/">Open Source Geospatial Foundation (OSGeo).</a>
+						<li>Es utilizada por muchas aplicaciones geoespaciales (ej. QGIS, GRASS GIS, gvSIG) y puede accederse desde varios lenguajes de programación (ej. Python, R, Java).</li>
+					</div>
+				</section>
+				<section id="ogrinfo-formats">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo --formats</strong>: lista los formatos vectoriales soportados.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo --formats
+								Supported Formats:
+								  PCIDSK -raster,vector- (rw+v): PCIDSK Database File
+								  netCDF -raster,vector- (rw+s): Network Common Data Format
+								  JP2OpenJPEG -raster,vector- (rwv): JPEG-2000 driver based on OpenJPEG library
+								  PDF -raster,vector- (rw+vs): Geospatial PDF
+								  MBTiles -raster,vector- (rw+v): MBTiles
+								  EEDA -vector- (ro): Earth Engine Data API
+								  ESRI Shapefile -vector- (rw+v): ESRI Shapefile
+								  MapInfo File -vector- (rw+v): MapInfo File
+								  UK .NTF -vector- (rov): UK .NTF
+								  OGR_SDTS -vector- (rov): SDTS
+								  S57 -vector- (rw+v): IHO S-57 (ENC)
+								  DGN -vector- (rw+v): Microstation DGN
+								  OGR_VRT -vector- (rov): VRT - Virtual Datasource
+								  REC -vector- (ro): EPIInfo .REC 
+								  Memory -vector- (rw+): Memory
+								  BNA -vector- (rw+v): Atlas BNA
+								  CSV -vector- (rw+v): Comma Separated Value (.csv)
+								  NAS -vector- (rov): NAS - ALKIS
+								  GML -vector- (rw+v): Geography Markup Language (GML)
+								  GPX -vector- (rw+v): GPX
+								  LIBKML -vector- (rw+v): Keyhole Markup Language (LIBKML)
+								  KML -vector- (rw+v): Keyhole Markup Language (KML)
+								  GeoJSON -vector- (rw+v): GeoJSON
+								  ...
+							</code></pre>				
+					</small></div>
+				</section>
+				<section id="ogrinfo-so-al">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -al -so</strong>: resume la información de una fuente de datos vectorial.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ cd
+								$ mkdir ogr-pruebas
+								$ cd ogr-pruebas
+								$ wget https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip
+								$ unzip ne_10m_admin_0_countries.zip
+							</code></pre>	
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo -al -so ne_10m_admin_0_countries.shp
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: ne_10m_admin_0_countries
+								Metadata:
+								  DBF_DATE_LAST_UPDATE=2018-05-21
+								Geometry: Polygon
+								Feature Count: 255
+								Extent: (-180.000000, -90.000000) - (180.000000, 83.634101)
+								Layer SRS WKT:
+								GEOGCS["WGS 84",
+									DATUM["WGS_1984",
+										SPHEROID["WGS 84",6378137,298.257223563,
+											AUTHORITY["EPSG","7030"]],
+										AUTHORITY["EPSG","6326"]],
+									PRIMEM["Greenwich",0,
+										AUTHORITY["EPSG","8901"]],
+									UNIT["degree",0.0174532925199433,
+										AUTHORITY["EPSG","9122"]],
+									AUTHORITY["EPSG","4326"]]
+								featurecla: String (15.0)
+								scalerank: Integer (1.0)...
+							</code></pre>							
+					</small></div>
+				</section>
+				<section id="ogrinfo-sql-1">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -dialect sqlite -sql</strong>: ejecuta una consulta en <a href="https://es.wikipedia.org/wiki/SQL">SQL</a> según el dialecto de <a href="https://www.sqlite.org/">SQLite</a>.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo ne_10m_admin_0_countries.shp -dialect sqlite \
+								-sql "SELECT NAME_ES FROM ne_10m_admin_0_countries"
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: SELECT
+								Geometry: None
+								Feature Count: 255
+								Layer SRS WKT:
+								(unknown)
+								NAME_ES: String (0.0)
+								OGRFeature(SELECT):0
+								  NAME_ES (String) = Indonesia
+
+								OGRFeature(SELECT):1
+								  NAME_ES (String) = Malasia
+
+								OGRFeature(SELECT):2
+								  NAME_ES (String) = Chile...
+							</code></pre>							
+					</small></div>
+				</section>
+				<section id="ogrinfo-sql-2">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -dialect sqlite -sql</strong>: ejecuta una consulta en <a href="https://es.wikipedia.org/wiki/SQL">SQL</a> según el dialecto de <a href="https://www.sqlite.org/">SQLite</a>.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo ne_10m_admin_0_countries.shp -dialect sqlite \
+								-sql "SELECT NAME_ES, CONTINENT FROM ne_10m_admin_0_countries"
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: SELECT
+								Geometry: None
+								Feature Count: 255
+								Layer SRS WKT:
+								(unknown)
+								NAME_ES: String (0.0)
+								CONTINENT: String (0.0)
+								OGRFeature(SELECT):0
+								  NAME_ES (String) = Indonesia
+								  CONTINENT (String) = Asia
+
+								OGRFeature(SELECT):1
+								  NAME_ES (String) = Malasia
+								  CONTINENT (String) = Asia
+
+								OGRFeature(SELECT):2
+								  NAME_ES (String) = Chile
+								  CONTINENT (String) = South America...
+							</code></pre>							
+					</small></div>
+				</section>
+				<section id="ogrinfo-sql-3">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -dialect sqlite -sql</strong>: ejecuta una consulta en <a href="https://es.wikipedia.org/wiki/SQL">SQL</a> según el dialecto de <a href="https://www.sqlite.org/">SQLite</a>.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo ne_10m_admin_0_countries.shp -dialect sqlite \
+								-sql "SELECT NAME_ES, CONTINENT FROM ne_10m_admin_0_countries WHERE CONTINENT='ASIA'"
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: SELECT
+								Geometry: None
+								Feature Count: 59
+								Layer SRS WKT:
+								(unknown)
+								NAME_ES: String (0.0)
+								CONTINENT: String (0.0)
+								OGRFeature(SELECT):0
+								  NAME_ES (String) = Indonesia
+								  CONTINENT (String) = Asia
+
+								OGRFeature(SELECT):1
+								  NAME_ES (String) = Malasia
+								  CONTINENT (String) = Asia
+
+								OGRFeature(SELECT):2
+								  NAME_ES (String) = Dekelia
+								  CONTINENT (String) = Asia...
+							</code></pre>							
+					</small></div>
+				</section>
+				<section id="ogrinfo-sql-4">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -dialect sqlite -sql</strong>: ejecuta una consulta en <a href="https://es.wikipedia.org/wiki/SQL">SQL</a> según el dialecto de <a href="https://www.sqlite.org/">SQLite</a>.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo ne_10m_admin_0_countries.shp -dialect sqlite \
+								-sql "SELECT NAME_ES, POP_EST, CONTINENT FROM ne_10m_admin_0_countries WHERE CONTINENT='ASIA' AND POP_EST >= 100000000"
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: SELECT
+								Geometry: None
+								Feature Count: 7
+								Layer SRS WKT:
+								(unknown)
+								NAME_ES: String (0.0)
+								POP_EST: Integer64 (0.0)
+								CONTINENT: String (0.0)
+								OGRFeature(SELECT):0
+								  NAME_ES (String) = Indonesia
+								  POP_EST (Integer64) = 260580739
+								  CONTINENT (String) = Asia
+
+								OGRFeature(SELECT):1
+								  NAME_ES (String) = India
+								  POP_EST (Integer64) = 1281935911
+								  CONTINENT (String) = Asia...
+							</code></pre>							
+					</small></div>
+				</section>
+				<section id="ogrinfo-sql-5">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -dialect sqlite -sql</strong>: ejecuta una consulta en <a href="https://es.wikipedia.org/wiki/SQL">SQL</a> según el dialecto de <a href="https://www.sqlite.org/">SQLite</a>.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo ne_10m_admin_0_countries.shp -dialect sqlite \
+								-sql "SELECT NAME_ES, POP_EST, CONTINENT FROM ne_10m_admin_0_countries WHERE CONTINENT='ASIA' AND POP_EST >= 100000000 ORDER BY NAME_ES"
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: SELECT
+								Geometry: None
+								Feature Count: 7
+								Layer SRS WKT:
+								(unknown)
+								NAME_ES: String (0.0)
+								POP_EST: Integer64 (0.0)
+								CONTINENT: String (0.0)
+								OGRFeature(SELECT):0
+								  NAME_ES (String) = Bangladés
+								  POP_EST (Integer64) = 157826578
+								  CONTINENT (String) = Asia
+
+								OGRFeature(SELECT):1
+								  NAME_ES (String) = Filipinas
+								  POP_EST (Integer64) = 104256076
+								  CONTINENT (String) = Asia...
+							</code></pre>							
 					</small></div>
 				</section>
 
