@@ -715,6 +715,156 @@
 							</code></pre>							
 					</small></div>
 				</section>
+				<section id="ogrinfo-sql-6">
+					<h3>ogrinfo</h3>
+					<div style="text-align:left"><small>
+							<strong>ogrinfo -dialect sqlite -sql</strong>: ejecuta una consulta en <a href="https://es.wikipedia.org/wiki/SQL">SQL</a> según el dialecto de <a href="https://www.sqlite.org/">SQLite</a>.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo ne_10m_admin_0_countries.shp -dialect sqlite \
+								-sql "SELECT CONTINENT, Sum(POP_EST) FROM ne_10m_admin_0_countries GROUP BY CONTINENT"
+								INFO: Open of `ne_10m_admin_0_countries.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: SELECT
+								Geometry: None
+								Feature Count: 8
+								Layer SRS WKT:
+								(unknown)
+								CONTINENT: String (0.0)
+								Sum(POP_EST): Integer (0.0)
+								OGRFeature(SELECT):0
+								  CONTINENT (String) = Africa
+								  Sum(POP_EST) (Integer) = 1220746242
+
+								OGRFeature(SELECT):1
+								  CONTINENT (String) = Antarctica
+								  Sum(POP_EST) (Integer) = 4050
+
+								OGRFeature(SELECT):2
+								  CONTINENT (String) = Asia
+								  Sum(POP_EST) (Integer) = 2147483647
+
+								OGRFeature(SELECT):3
+								  CONTINENT (String) = Europe
+								  Sum(POP_EST) (Integer) = 747365363...
+							</code></pre>							
+					</small></div>
+				</section>
+				<section id="ogr2ogr-t_srs">
+					<h3>ogr2ogr</h3>
+					<div style="text-align:left"><small>
+							<strong>ogr2ogr -t_srs</strong>: transforma una fuente de datos a otro SRS.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogr2ogr -t_srs EPSG:5367 ne_10m_admin_0_countries_crtm05.shp ne_10m_admin_0_countries.shp
+							</code></pre>			
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo -so -al ne_10m_admin_0_countries_crtm05.shp
+								INFO: Open of `ne_10m_admin_0_countries_crtm05.shp'
+									  using driver `ESRI Shapefile' successful.
+
+								Layer name: ne_10m_admin_0_countries_crtm05
+								Metadata:
+								  DBF_DATE_LAST_UPDATE=2019-02-27
+								Geometry: Polygon
+								Feature Count: 0
+								Extent: (0.000000, 0.000000) - (0.000000, 0.000000)
+								Layer SRS WKT:
+								PROJCS["CR05 / CRTM05",
+									GEOGCS["CR05",
+										DATUM["Costa_Rica_2005",
+											SPHEROID["WGS 84",6378137,298.257223563,
+												AUTHORITY["EPSG","7030"]],
+											TOWGS84[0,0,0,0,0,0,0],
+											AUTHORITY["EPSG","1065"]],
+										PRIMEM["Greenwich",0,
+											AUTHORITY["EPSG","8901"]],
+										UNIT["degree",0.0174532925199433,
+											AUTHORITY["EPSG","9122"]],
+										AUTHORITY["EPSG","5365"]],
+									PROJECTION["Transverse_Mercator"],
+									PARAMETER["latitude_of_origin",0],
+									PARAMETER["central_meridian",-84],
+									PARAMETER["scale_factor",0.9999],
+									PARAMETER["false_easting",500000],
+									PARAMETER["false_northing",0],
+									UNIT["metre",1,
+										AUTHORITY["EPSG","9001"]],
+									AUTHORITY["EPSG","5367"]]...
+							</code></pre>				
+					</small></div>
+				</section>
+				<section id="ogr2ogr-f-1">
+					<h3>ogr2ogr</h3>
+					<div style="text-align:left"><small>
+							<strong>ogr2ogr -f</strong>: transforma una fuente de datos a otro formato vectorial.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogr2ogr -f KML ne_10m_admin_0_countries.kml ne_10m_admin_0_countries.shp
+							</code></pre>			
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo -so -al ne_10m_admin_0_countries.kml
+								INFO: Open of `ne_10m_admin_0_countries.kml'
+									  using driver `LIBKML' successful.
+
+								Layer name: ne_10m_admin_0_countries
+								Geometry: Unknown (any)
+								Feature Count: 255
+								Extent: (-180.000000, -90.000000) - (180.000000, 83.634101)
+								Layer SRS WKT:
+								GEOGCS["WGS 84",
+									DATUM["WGS_1984",
+										SPHEROID["WGS 84",6378137,298.257223563,
+											AUTHORITY["EPSG","7030"]],
+										AUTHORITY["EPSG","6326"]],
+									PRIMEM["Greenwich",0,
+										AUTHORITY["EPSG","8901"]],
+									UNIT["degree",0.0174532925199433,
+										AUTHORITY["EPSG","9122"]],
+									AUTHORITY["EPSG","4326"]]
+								Name: String (0.0)
+								description: String (0.0)...
+							</code></pre>				
+					</small></div>
+				</section>
+				<section id="ogr2ogr-f-2">
+					<h3>ogr2ogr</h3>
+					<div style="text-align:left"><small>
+							<strong>ogr2ogr -f</strong>: transforma una fuente de datos a otro formato vectorial.
+							<pre><code class="hljs" data-trim contenteditable>
+								# Registros de presencia de mamíferos en Costa Rica
+								$ wget http://api.gbif.org/v1/occurrence/download/request/0046867-181108115102211.zip
+								$ unzip 0046867-181108115102211.zip
+								$ mv 0046867-181108115102211.csv mamiferos-cr.csv
+							</code></pre>
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogr2ogr -oo X_POSSIBLE_NAMES=decimalLongitude* -oo Y_POSSIBLE_NAMES=decimalLatitude* \
+								-f "ESRI Shapefile" \
+								-s_srs EPSG:4326 -t_srs EPSG:4326 \
+								mamiferos-cr.shp \
+								CSV:mamiferos-cr.csv
+							</code></pre>			
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo -so -al mamiferos-cr.shp
+							</code></pre>				
+					</small></div>
+				</section>
+				<section id="ogr2ogr-sql-1">
+					<h3>ogr2ogr</h3>
+					<div style="text-align:left"><small>
+							<strong>ogr2ogr -dialect sqlite -sql</strong>: selecciona registros mediante una consulta SQL.
+							<pre><code class="hljs" data-trim contenteditable>
+								# Shapefile de provincias/estados
+								$ wget https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_1_states_provinces.zip
+								$ unzip ne_10m_admin_1_states_provinces.zip
+							</code></pre>
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogr2ogr costa-rica.shp ne_10m_admin_1_states_provinces.shp -dialect sqlite \
+								-sql "SELECT * FROM ne_10m_admin_1_states_provinces WHERE admin='Costa Rica'"
+							</code></pre>			
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo -so -al costa-rica.shp
+							</code></pre>				
+					</small></div>
+				</section>
 
 			</div>
 		</div>
