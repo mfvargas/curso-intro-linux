@@ -869,6 +869,19 @@
 							</code></pre>				
 					</small></div>
 				</section>
+				<section id="ogr2ogr-sql-2">
+					<h3>ogr2ogr</h3>
+					<div style="text-align:left"><small>
+							<strong>ogr2ogr -dialect sqlite -sql</strong>: selecciona registros mediante una consulta SQL geoespacial.
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogr2ogr mamiferos-heredia.shp ne_10m_admin_1_states_provinces.shp -dialect sqlite \
+								-sql "SELECT m.* FROM ne_10m_admin_1_states_provinces p, 'mamiferos-cr.shp'.mamiferos-cr m WHERE ST_Contains(p.geometry, m.geometry) AND p.name = 'HEREDIA'"
+							</code></pre>			
+							<pre><code class="hljs" data-trim contenteditable>
+								$ ogrinfo -so -al costa-rica.shp
+							</code></pre>				
+					</small></div>
+				</section>
 
 			</div>
 		</div>
